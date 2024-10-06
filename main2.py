@@ -530,18 +530,32 @@ def decrypt_string(encrypted_text, subkeys):
     return bin_to_string(decrypted_data)
 
 
-if __name__ == "__main__":
+def main():
     random_key = generate_random_key()
     key_56bit = generate_key_64_to_56(random_key)
-
     subkeys = generate_subkeys(key_56bit)
 
-    plaintext = "Hello, Information Security Class B!"
+    while True:
+        print("\nMenu:")
+        print("1. Encrypt")
+        print("2. Decrypt")
+        print("3. Exit")
+        choice = input("Choose an option: ")
 
-    encrypted_text = encrypt_string(plaintext, subkeys)
-    print("Plaintext:", plaintext)
-    print("Encrypted Text:", encrypted_text)
+        if choice == "1":
+            plaintext = input("Enter the plaintext: ")
+            encrypted_text = encrypt_string(plaintext, subkeys)
+            print("Encrypted Text:", encrypted_text)
+        elif choice == "2":
+            encrypted_text = input("Enter the encrypted text: ")
+            decrypted_text = decrypt_string(encrypted_text, subkeys)
+            print("Decrypted Text:", decrypted_text)
+        elif choice == "3":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice, please try again.")
 
-    decrypted_text = decrypt_string(encrypted_text, subkeys)
-    print("Decrypted Text:", decrypted_text)
-    print("Dekripsi Sukses:", plaintext == decrypted_text)
+
+if __name__ == "__main__":
+    main()
